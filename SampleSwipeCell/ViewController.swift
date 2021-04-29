@@ -17,6 +17,15 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
     }
+    
+    // tableViewの編集モード切り替え
+    @IBAction func editAction(_ sender: UIBarButtonItem) {
+        if tableView.isEditing {
+            tableView.setEditing(false, animated: true)
+        } else {
+            tableView.setEditing(true, animated: true)
+        }
+    }
 }
 
 extension ViewController: UITableViewDataSource {
@@ -30,6 +39,11 @@ extension ViewController: UITableViewDataSource {
         content.text = "サンプル"
         cell.contentConfiguration = content
         return cell
+    }
+    
+    // セルの並び替えを有効にする
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        
     }
 }
 
