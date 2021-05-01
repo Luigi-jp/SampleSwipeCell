@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.register(UINib(nibName: "CustomTableViewCell", bundle: nil), forCellReuseIdentifier: "cell")
     }
     
     // tableViewの編集モード切り替え
@@ -34,10 +35,11 @@ extension ViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        var content = cell.defaultContentConfiguration()
-        content.text = "サンプル"
-        cell.contentConfiguration = content
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomTableViewCell
+//        var content = cell.defaultContentConfiguration()
+//        content.text = "サンプル"
+//        cell.contentConfiguration = content
+        cell.TitleLabel.text = "サンプル"
         return cell
     }
     
