@@ -10,6 +10,8 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    var Sections: [String] = ["A", "B", "C"]
+    var Rows: [[String]] = [["あ", "い", "う"], ["え", "お"], ["か"]]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +32,12 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return Sections.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return Rows[section].count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -39,8 +45,12 @@ extension ViewController: UITableViewDataSource {
 //        var content = cell.defaultContentConfiguration()
 //        content.text = "サンプル"
 //        cell.contentConfiguration = content
-        cell.TitleLabel.text = "サンプル"
+        cell.TitleLabel.text = Rows[indexPath.section][indexPath.row]
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return Sections[section]
     }
     
     // セルの並び替えを有効にする
